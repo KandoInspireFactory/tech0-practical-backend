@@ -16,7 +16,16 @@ DB_NAME = os.getenv('DB_NAME')
 # MySQLのURL構築
 DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-SSL_CA_PATH = os.getenv('SSL_CA_PATH')
+# SSL証明書のパスを自動解決 (プロジェクトルートにあると仮定)
+# このファイルのパス: .../backend/db_control/connect_MySQL.py
+# 証明書の場所: .../backend/DigiCertGlobalRootG2.crt.pem
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SSL_CA_PATH = os.path.join(BASE_DIR, 'DigiCertGlobalRootG2.crt.pem')
+
+# 環境変数で上書きされている場合はそれを使う (任意)
+if os.getenv('SSL_CA_PATH'):
+    SSL_CA_PATH = os.getenv('SSL_CA_PATH')
+
 # エンジンの作成
 engine = create_engine(
     DATABASE_URL,
