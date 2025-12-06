@@ -17,7 +17,12 @@ class Customer(BaseModel):
 app = FastAPI()
 
 # Initialize the database tables
-init_db()
+@app.on_event("startup")
+def startup_event():
+    try:
+        init_db()
+    except Exception as e:
+        print(f"Failed to initialize database: {e}")
 
 # CORSミドルウェアの設定
 app.add_middleware(
