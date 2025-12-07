@@ -22,7 +22,9 @@ def startup_event():
     try:
         init_db()
     except Exception as e:
+        import traceback
         print(f"Failed to initialize database: {e}")
+        traceback.print_exc()
 
 # CORSミドルウェアの設定
 app.add_middleware(

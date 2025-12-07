@@ -22,9 +22,7 @@ DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SSL_CA_PATH = os.path.join(BASE_DIR, 'DigiCertGlobalRootG2.crt.pem')
 
-# 環境変数で上書きされている場合はそれを使う (任意)
-if os.getenv('SSL_CA_PATH'):
-    SSL_CA_PATH = os.getenv('SSL_CA_PATH')
+
 
 # エンジンの作成
 engine = create_engine(
