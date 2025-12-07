@@ -153,5 +153,4 @@ cython_debug/
 # OS Specific
 .DS_Store
 
-# Certs
-*.pem
+
